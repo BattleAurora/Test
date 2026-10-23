@@ -1,0 +1,13 @@
+name: Repro
+
+on: [workflow_dispatch]
+
+jobs:
+  repro:
+    runs-on: ubuntu-26.04
+    steps:
+      - run: sudo apt-get update && sudo apt-get install -y libjitterentropy3-dev
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.4'
+      - run: gem install rugged -v 1.9.6
