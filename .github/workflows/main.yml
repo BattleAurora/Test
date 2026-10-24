@@ -6,6 +6,7 @@ jobs:
   repro:
     runs-on: ubuntu-26.04-arm
     steps:
+      - run: sudo apt-get install -y libjitterentropy3-dev
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.4'
