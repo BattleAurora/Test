@@ -1,13 +1,18 @@
-name: Repro
+name: PDF Tools Workflow
 
-on: [workflow_dispatch]
+# Déclenchement UNIQUEMENT manuel depuis l'interface GitHub
+on:
+  workflow_dispatch:
 
 jobs:
-  repro:
-    runs-on: ubuntu-26.04-arm
+  build-and-run:
+    runs-on: ubuntu-26.04
+
     steps:
-      - run: sudo apt-get update && sudo apt-get install -y libjitterentropy3-dev
-      - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.4'
-      - run: gem install rugged -v 1.9.6
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install PDF utilities
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes pdftk poppler-utils
